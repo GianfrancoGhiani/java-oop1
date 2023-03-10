@@ -8,28 +8,28 @@ public class Prodotto {
     Random rand = new Random();
     DecimalFormat dec = new DecimalFormat("#.00");
     // variables
-    private int code;
+    private String code = "";
     private String name;
     private String description;
     private double price;
     private double iva;
     // constructors
     public Prodotto(){
-        code = rand.nextInt(1000000);
-        name = "";
-        description = "";
+        code= String.format("%08d",(rand.nextInt(0,1000000)));
+        name = "Product";
+        description = "Description not available";
         price = 0;
         iva = 22;
     }
     public Prodotto(String name, String description, double price, double iva) {
-        code = rand.nextInt(1000000);
+        code= String.format("%08d",(rand.nextInt(0,1000000)));
         this.name = name;
         this.description = description;
         this.price = price;
         this.iva = iva;
     }
 
-    public int getCode() {
+    public String getCode() {
         return code;
     }
 
@@ -76,5 +76,18 @@ public class Prodotto {
     //returns code-name of the product
     public String getProductCodeName(){
         return code +"-"+ name;
+    }
+
+    @Override
+    public String toString() {
+        return "Prodotto{" +
+                "code=" + code +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", price=" + price +
+                ", iva=" + iva +
+                ", final price=" + (price + ((price /100)*iva)) +
+                ", code-name=" + (code +"-"+name) +
+                '}';
     }
 }
