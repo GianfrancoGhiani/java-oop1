@@ -6,30 +6,31 @@ import java.util.Random;
 public class Prodotto {
     // imports
     Random rand = new Random();
-    DecimalFormat dec = new DecimalFormat("#.00");
+    DecimalFormat decPrice = new DecimalFormat("#.00");
+    DecimalFormat codePattern = new DecimalFormat("00000000.");
     // variables
-    private String code = "";
+    private int code ;
     private String name;
     private String description;
     private double price;
     private double iva;
     // constructors
     public Prodotto(){
-        code= String.format("%08d",(rand.nextInt(0,1000000)));
+        code= rand.nextInt(0,1000000);
         name = "Product";
         description = "Description not available";
         price = 0;
         iva = 22;
     }
     public Prodotto(String name, String description, double price, double iva) {
-        code= String.format("%08d",(rand.nextInt(0,1000000)));
+        code= rand.nextInt(0,1000000);
         this.name = name;
         this.description = description;
         this.price = price;
         this.iva = iva;
     }
 
-    public String getCode() {
+    public int getCode() {
         return code;
     }
 
@@ -66,11 +67,11 @@ public class Prodotto {
     }
     //returns base price not including IVA
     public String getBasePrice() {
-        return dec.format(price);
+        return decPrice.format(price);
     }
     //returns price including IVA
     public String getFinalPrice() {
-        return dec.format(price + ((price / 100) * iva));
+        return decPrice.format(price + ((price / 100) * iva));
     }
 
     //returns code-name of the product
@@ -81,13 +82,13 @@ public class Prodotto {
     @Override
     public String toString() {
         return "Prodotto{" +
-                "code=" + code +
+                "code=" + codePattern.format(code) +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", price=" + price +
                 ", iva=" + iva +
                 ", final price=" + (price + ((price /100)*iva)) +
-                ", code-name=" + (code +"-"+name) +
+                ", code-name=" + (codePattern.format(code) +"-"+name) +
                 '}';
     }
 }

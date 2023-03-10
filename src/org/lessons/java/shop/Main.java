@@ -8,6 +8,8 @@ public class Main {
         System.out.println(product.toString());
         product.setPrice(12.00);
         System.out.println(product.toString());
+
+
     }
     public static Prodotto CreateProduct(){
         Scanner input = new Scanner(System.in);
